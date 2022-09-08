@@ -36,7 +36,7 @@ public class JdbcFightDao implements FightDao{
 
     @Override
     public void addFight(Fight fight) {
-        String sql = "INSERT INTO fights (fight_no, player_name, salary) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO fights (id, fight_no, player_name, salary) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, fight.getFight_No(), fight.getPlayName(), fight.getSalary());
     }
 
