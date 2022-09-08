@@ -37,6 +37,7 @@ public class FightController {
        return fightDao.getCombo();
     }
 
+
     @RequestMapping(path = "/fightsInUse", method = RequestMethod.GET)
     public List<Fight> getAllFightsInUse() {
         return fightDao.getAllFightInUse();
