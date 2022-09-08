@@ -22,7 +22,7 @@ public class JdbcFightDao implements FightDao{
     public List<Fight> getAllFight() {
         List<Fight> fights = new ArrayList<>();
 
-        String sql = "SELECT id, fight_no, player_name, salary FROM fights;";
+        String sql = "SELECT id, fight_no, player_name, salary FROM fights ORDER BY id;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -115,7 +115,7 @@ public class JdbcFightDao implements FightDao{
     public List<Fight> getAllFightInUse() {
         List<Fight> fights = new ArrayList<>();
 
-        String sql = "SELECT id, fight_no, player_name, salary FROM fightsInUse order by id;";
+        String sql = "SELECT id, fight_no, player_name, salary FROM fightsInUse ORDER BY fight_no;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
