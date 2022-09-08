@@ -17,4 +17,8 @@ public interface FightDao {
     List<List<Fight>> getCombo();
 
     BigDecimal getTotalSalary(List<Fight> fights);
+    void addFightInUse(Fight fight);
+    void deleteFightInUse(int id);
+    List<Fight> getAllFightInUse();
+
 }

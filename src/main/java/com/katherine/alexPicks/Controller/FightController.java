@@ -37,4 +37,19 @@ public class FightController {
        return fightDao.getCombo();
     }
 
+    @RequestMapping(path = "/fightsInUse", method = RequestMethod.GET)
+    public List<Fight> getAllFightsInUse() {
+        return fightDao.getAllFightInUse();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/addInUse", method = RequestMethod.POST)
+    public void addFightInUse(@RequestBody Fight fight) {
+        fightDao.addFightInUse(fight);
+    }
+
+    @RequestMapping(path = "/deleteInUse/{id}", method = RequestMethod.DELETE)
+    public void deleteFightInUse(@PathVariable int id) {
+        fightDao.deleteFightInUse(id);
+    }
 }

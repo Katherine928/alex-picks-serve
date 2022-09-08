@@ -48,7 +48,7 @@ public class JdbcFightDao implements FightDao{
 
     @Override
     public List<List<Fight>> checkCombo(int k) {
-        List<Fight> fights = getAllFight();
+        List<Fight> fights = getAllFightInUse();
         List<List<Fight>> ans = new LinkedList<>();
         backtrack(fights, fights.get(0), new LinkedList<Fight>(), fights.size(), k, ans);
         return ans;
@@ -99,7 +99,33 @@ public class JdbcFightDao implements FightDao{
         }
     }
 
+    @Override
+    public void addFightInUse(Fight fight) {
+        String sql = "INSERT INTO fightsInUse (id, fight_no, player_name, salary) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, fight.getId(), fight.getFight_No(), fight.getPlayName(), fight.getSalary());
+    }
 
+    @Override
+    public void deleteFightInUse(int id) {
+        String sql = "DELETE FROM fightsInUse WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+    }
+
+    @Override
+    public List<Fight> getAllFightInUse() {
+        List<Fight> fights = new ArrayList<>();
+
+        String sql = "SELECT id, fight_no, player_name, salary FROM fightsInUse order by id;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while (results.next()) {
+            Fight fight = mapRowToFight(results);
+            fights.add(fight);
+        }
+
+        return fights;
+    }
 
 
     public Fight mapRowToFight(SqlRowSet result) {
